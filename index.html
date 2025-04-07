@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Interactiva</title>
+    <link rel="icon" href="foto.png" type="image/png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #6578f6, #7bc1fe); /* Fondo degradado */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 2.5em; /* Ajuste para móviles */
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .image-container {
+            position: relative;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px; /* Bordes redondeados */
+        }
+
+        /* MODAL ESTILOS */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .close {
+            align-self: flex-end;
+            font-size: 28px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        iframe {
+            flex-grow: 1;
+            width: 100%;
+            border: none;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                height: auto;
+                flex-direction: column;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .modal-content {
+                width: 95%;
+                height: 90vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .modal-content {
+                height: 85vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Haz Click sobre la Calculadora Interactiva</h1>
+        <div class="image-container">
+            <img src="papeleria.jpg" alt="Calculadora" usemap="#calculadora-map">
+            <map name="calculadora-map">
+                <area shape="rect" coords="30,40,250,320" alt="Abrir Calculadora" href="#" onclick="openModal(); return false;">
+            </map>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal();">&times;</span>
+            <iframe src="calculadora.html"></iframe>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById("modal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("modal").style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById("modal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+    const area = document.querySelector("area");
+    const image = document.querySelector(".image-container img");
+
+    image.addEventListener("mousemove", function(event) {
+        const rect = image.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        // Coordenadas del área (deben coincidir con las del <area>)
+        const areaCoords = [30, 40, 250, 290];
+
+        if (x >= areaCoords[0] && x <= areaCoords[2] && y >= areaCoords[1] && y <= areaCoords[3]) {
+            image.style.cursor = "pointer";
+        } else {
+            image.style.cursor = "default";
+        }
+    });
+});
+
+
+    </script>
+</body>
+</html>
+
