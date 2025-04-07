@@ -15,28 +15,31 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #6578f6, #7bc1fe); /* Fondo degradado */
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            padding: 20px;
+    background: linear-gradient(to right, #6578f6, #7bc1fe);
+    color: white;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    min-height: 100vh;
+    overflow-y: auto;
         }
 
         .container {
             display: flex;
-            flex-direction: column;
-            align-items: center;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px;
+    width: 100%;
         }
 
         h1 {
-            font-size: 2.5em; /* Ajuste para móviles */
-            margin-bottom: 20px;
-            color: #ffffff;
-            font-family: 'Arial', sans-serif;
-            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+            font-size: clamp(1.5rem, 5vw, 2.5rem); /* Ajuste fluido */
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    padding: 0 10px;
         }
 
         .image-container {
@@ -69,13 +72,13 @@
 
         .modal-content {
             background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
+    padding: 20px;
+    border-radius: 10px;
+    width: 95%;
+    max-width: 500px;
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
         }
 
         .close {
@@ -98,31 +101,22 @@
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
-            body {
-                padding: 10px;
-                height: auto;
-                flex-direction: column;
-            }
+    h1 {
+        font-size: clamp(1.4rem, 4.5vw, 2rem);
+    }
+    .modal-content {
+        height: 90vh;
+    }
+}
 
-            h1 {
-                font-size: 2em;
-            }
-
-            .modal-content {
-                width: 95%;
-                height: 90vh;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.8em;
-            }
-
-            .modal-content {
-                height: 85vh;
-            }
-        }
+@media (max-width: 480px) {
+    h1 {
+        font-size: clamp(1.2rem, 5vw, 1.8rem);
+    }
+    .modal-content {
+        height: 85vh;
+    }
+}
     </style>
 </head>
 <body>
@@ -183,4 +177,3 @@
     </script>
 </body>
 </html>
-
