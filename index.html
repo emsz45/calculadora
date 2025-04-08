@@ -125,7 +125,7 @@
         <div class="image-container">
             <img src="papeleria.jpg" alt="Calculadora" usemap="#calculadora-map">
             <map name="calculadora-map">
-                <area shape="rect" coords="24,42,190,220" alt="Abrir Calculadora" href="#" onclick="openModal(); return false;">
+                <area shape="rect" coords="24,42,200,270" alt="Abrir Calculadora" href="#" onclick="openModal(); return false;">
             </map>
         </div>
     </div>
@@ -139,39 +139,49 @@
     </div>
 
     <script>
-        function openModal() {
-            document.getElementById("modal").style.display = "flex";
-        }
+     function openModal() {
+        document.getElementById("modal").style.display = "flex";
+    }
 
-        function closeModal() {
-            document.getElementById("modal").style.display = "none";
-        }
+    function closeModal() {
+        document.getElementById("modal").style.display = "none";
+    }
 
-        window.onclick = function(event) {
-            const modal = document.getElementById("modal");
-            if (event.target == modal) {
-                modal.style.display = "none";
+    window.onclick = function(event) {
+        const modal = document.getElementById("modal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const area = document.querySelector("area");
+        const image = document.querySelector(".image-container img");
+
+        image.addEventListener("mousemove", function(event) {
+            const rect = image.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            // Ajustar las coordenadas según el tamaño de la imagen
+            const areaCoords = [24,42,200,270];
+            const scaleX = rect.width / image.naturalWidth;
+            const scaleY = rect.height / image.naturalHeight;
+
+            const adjustedCoords = [
+                areaCoords[0] * scaleX,
+                areaCoords[1] * scaleY,
+                areaCoords[2] * scaleX,
+                areaCoords[3] * scaleY
+            ];
+
+            if (x >= adjustedCoords[0] && x <= adjustedCoords[2] && y >= adjustedCoords[1] && y <= adjustedCoords[3]) {
+                image.style.cursor = "pointer";
+            } else {
+                image.style.cursor = "default";
             }
-        }
-        document.addEventListener("DOMContentLoaded", function() {
-    const area = document.querySelector("area");
-    const image = document.querySelector(".image-container img");
-
-    image.addEventListener("mousemove", function(event) {
-        const rect = image.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-
-        // Coordenadas del área (deben coincidir con las del <area>)
-        const areaCoords = [24,42,190,220];
-
-        if (x >= areaCoords[0] && x <= areaCoords[2] && y >= areaCoords[1] && y <= areaCoords[3]) {
-            image.style.cursor = "pointer";
-        } else {
-            image.style.cursor = "default";
-        }
+        });
     });
-});
 
 
     </script>
